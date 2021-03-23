@@ -1,0 +1,14 @@
+{
+  "references": [
+    { "path": "../blockchain" },
+    { "path": "../core" },
+    { "path": "../state" }
+  ],
+  "extends": "../../tsconfig.package.json",
+  "include": ["src/**/**.ts"],
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "tsBuildInfoFile": "dist/tsbuildinfo"
+  }
+}

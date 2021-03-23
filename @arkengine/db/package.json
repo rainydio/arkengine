@@ -1,0 +1,22 @@
+{
+	"name": "@arkengine/db",
+	"version": "1.0.0",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"files": [
+		"dist",
+		"package.json"
+	],
+	"scripts": {
+		"build": "tsc --build",
+		"clean": "rm -rf dist",
+		"ts-link": "node ../../scripts/ts-link.js"
+	},
+	"dependencies": {
+		"@types/node": "^14.0.14"
+	},
+	"devDependencies": {
+		"@types/node-lmdb": "workspace:",
+		"typescript": "^4.0.5"
+	}
+}

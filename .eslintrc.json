@@ -1,0 +1,27 @@
+{
+	"root": true,
+	"env": { "node": true, "es6": true },
+	"plugins": ["simple-import-sort"],
+	"extends": ["eslint:recommended", "prettier"],
+	"rules": {
+		"simple-import-sort/imports": "warn"
+	},
+	"overrides": [
+		{
+			"files": ["*.ts"],
+			"parser": "@typescript-eslint/parser",
+			"plugins": ["@typescript-eslint"],
+			"extends": [
+				"plugin:@typescript-eslint/eslint-recommended",
+				"plugin:@typescript-eslint/recommended",
+				"prettier/@typescript-eslint"
+			],
+			"rules": {
+				"@typescript-eslint/explicit-function-return-type": "off",
+				"@typescript-eslint/no-use-before-define": "off",
+				"@typescript-eslint/no-namespace": "off"
+			}
+		}
+	],
+	"ignorePatterns": ["packages/*/dist/**/*", ".yarn"]
+}

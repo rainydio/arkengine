@@ -1,0 +1,47 @@
+{
+	"name": "@arkengine/replay-postgres-mainnet",
+	"version": "1.0.0",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"files": [
+		"dist",
+		"package.json"
+	],
+	"scripts": {
+		"build": "tsc --build",
+		"clean": "rm -rf dist",
+		"test": "jest",
+		"start": "node ./dist/index.js",
+		"clinic": "clinic flame -- node ./dist/index.js",
+		"ts-link": "node ../../scripts/ts-link.js"
+	},
+	"dependencies": {
+		"@arkecosystem/crypto": "next",
+		"@arkengine/blockchain": "workspace:",
+		"@arkengine/blockchain-module": "workspace:",
+		"@arkengine/blockchain-serde": "workspace:",
+		"@arkengine/blockchain-serde-module": "workspace:",
+		"@arkengine/core-module": "workspace:",
+		"@arkengine/core-serde": "workspace:",
+		"@arkengine/core-serde-module": "workspace:",
+		"@arkengine/db": "workspace:",
+		"@arkengine/db-module": "workspace:",
+		"@arkengine/serde-module": "workspace:",
+		"@arkengine/state-module": "workspace:",
+		"@types/node": "^14.0.14",
+		"@types/pg": "^7.14.11",
+		"bcrypto": "^5.4.0",
+		"inversify": "^5.0.1",
+		"node-lmdb": "^0.9.4",
+		"pg": "^8.5.1",
+		"reflect-metadata": "^0.1.13"
+	},
+	"devDependencies": {
+		"@types/bcrypto": "workspace:",
+		"@types/jest": "^26.0.20",
+		"@types/node-lmdb": "workspace:",
+		"clinic": "^8.0.1",
+		"jest": "^26.6.3",
+		"typescript": "^4.0.5"
+	}
+}

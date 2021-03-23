@@ -1,0 +1,26 @@
+{
+	"name": "@arkengine/state-module",
+	"version": "1.0.0",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"files": [
+		"dist",
+		"package.json"
+	],
+	"scripts": {
+		"build": "tsc --build",
+		"clean": "rm -rf dist",
+		"ts-link": "node ../../scripts/ts-link.js"
+	},
+	"dependencies": {
+		"@arkengine/serde": "workspace:",
+		"@arkengine/state": "workspace:",
+		"@types/node": "^14.0.14",
+		"bcrypto": "^5.4.0",
+		"inversify": "^5.0.1"
+	},
+	"devDependencies": {
+		"@types/bcrypto": "workspace:",
+		"typescript": "^4.0.5"
+	}
+}

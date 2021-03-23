@@ -1,0 +1,23 @@
+{
+	"name": "@arkengine/blockchain-serde",
+	"version": "1.0.0",
+	"main": "dist/index.js",
+	"types": "dist/index.d.ts",
+	"files": [
+		"dist",
+		"package.json"
+	],
+	"scripts": {
+		"build": "tsc --build",
+		"clean": "rm -rf dist",
+		"ts-link": "node ../../scripts/ts-link.js"
+	},
+	"dependencies": {
+		"@arkengine/blockchain": "workspace:",
+		"@arkengine/serde": "workspace:",
+		"@types/node": "^14.0.14"
+	},
+	"devDependencies": {
+		"typescript": "^4.0.5"
+	}
+}
