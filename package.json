@@ -8,9 +8,8 @@
 		"test": "yarn workspaces foreach -v run test",
 		"build": "yarn workspaces foreach -v run build",
 		"clean": "yarn workspaces foreach -v run clean",
-		"pkg-new": "node scripts/pkg-new.js",
 		"ts-link": "yarn workspaces foreach run ts-link",
-		"report": "xdg-open report/coverage/lcov-report/index.html"
+		"pkg-new": "node scripts/pkg-new.js"
 	},
 	"devDependencies": {
 		"@types/node": "^14.14.35",
