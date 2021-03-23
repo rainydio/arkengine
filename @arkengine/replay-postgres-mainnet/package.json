@@ -16,7 +16,7 @@
 		"ts-link": "node ../../scripts/ts-link.js"
 	},
 	"dependencies": {
-		"@arkecosystem/crypto": "next",
+		"@arkecosystem/crypto": "^3.0.0-next.23",
 		"@arkengine/blockchain": "workspace:",
 		"@arkengine/blockchain-module": "workspace:",
 		"@arkengine/blockchain-serde": "workspace:",
@@ -28,20 +28,20 @@
 		"@arkengine/db-module": "workspace:",
 		"@arkengine/serde-module": "workspace:",
 		"@arkengine/state-module": "workspace:",
-		"@types/node": "^14.0.14",
+		"@types/node": "^14.14.35",
 		"@types/pg": "^7.14.11",
 		"bcrypto": "^5.4.0",
-		"inversify": "^5.0.1",
+		"inversify": "^5.0.5",
 		"node-lmdb": "^0.9.4",
 		"pg": "^8.5.1",
 		"reflect-metadata": "^0.1.13"
 	},
 	"devDependencies": {
 		"@types/bcrypto": "workspace:",
-		"@types/jest": "^26.0.20",
+		"@types/jest": "^26.0.21",
 		"@types/node-lmdb": "workspace:",
 		"clinic": "^8.0.1",
 		"jest": "^26.6.3",
-		"typescript": "^4.0.5"
+		"typescript": "^4.2.3"
 	}
 }
