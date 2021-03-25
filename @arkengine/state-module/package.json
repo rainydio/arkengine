@@ -13,6 +13,8 @@
 		"ts-link": "node ../../scripts/ts-link.js"
 	},
 	"dependencies": {
+		"@arkengine/blockchain": "workspace:",
+		"@arkengine/db": "workspace:",
 		"@arkengine/serde": "workspace:",
 		"@arkengine/state": "workspace:",
 		"@types/node": "^14.14.35",

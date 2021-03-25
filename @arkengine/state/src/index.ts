@@ -1,11 +1,15 @@
-export interface IBlockService {
+export interface ILastBlockDb {
+	hasId(): boolean;
 	getId(): Buffer;
+	setId(id: Buffer): void;
+
 	getHeight(): number;
-	getTotalAmount(): bigint;
-	getTotalFee(): bigint;
-	startNewBlock(id: Buffer): void;
-	increaseTotalAmount(amount: bigint): void;
-	increaseTotalFee(fee: bigint): void;
+	setHeight(height: number): void;
+}
+
+export interface IBalanceDb {
+	get(address: Buffer): bigint;
+	set(address: Buffer, balance: bigint): void;
 }
 
 export interface IAddressService {
@@ -13,36 +17,33 @@ export interface IAddressService {
 	verifyAddressNetwork(address: Buffer): void;
 }
 
-export interface IEcdsaService {
-	verify(publicKey: Buffer, hash: Buffer, signature: Buffer): void;
-}
-
-export interface ISecondSignatureService {
-	enable(address: Buffer, secondPublicKey: Buffer): void;
-	isEnabled(address: Buffer): boolean;
-	getSecondPublicKey(address: Buffer): Buffer;
-	verify(address: Buffer, hash: Buffer, signature: Buffer): void;
-}
-
-export interface ILegacyMultiSignatureService {
-	enable(address: Buffer, min: number, lifetime: number, publicKeys: Buffer[]): void;
-	isEnabled(address: Buffer): boolean;
-	getMin(address: Buffer): number;
-	getLifetime(address: Buffer): number;
-	getPublicKeys(address: Buffer): Buffer[];
-	verify(address: Buffer, hash: Buffer, signatures: Buffer[]): void;
-}
-
 export interface IBalanceService {
-	getAvailable(address: Buffer): bigint;
+	get(address: Buffer): bigint;
 	reward(address: Buffer, amount: bigint): void;
 	burn(address: Buffer, amount: bigint): void;
 	transfer(from: Buffer, to: Buffer, amount: bigint): void;
 }
 
-export const IBlockService = Symbol(`IBlockService@${__filename}`);
+export interface ILastBlockService {
+	getId(): Buffer;
+	getHeight(): number;
+	setNext(blockId: Buffer): void;
+}
+
+export interface IPublicKeyService {
+	verify(publicKey: Buffer): void;
+}
+
+export interface IEcdsaService {
+	verify(publicKey: Buffer, hash: Buffer, signature: Buffer): void;
+}
+
+export const IBalanceDb = Symbol(`IBalanceDb@${__filename}`);
+export const ILastBlockDb = Symbol(`ILastBlockDb@${__filename}`);
+
 export const IAddressService = Symbol(`IAddressService@${__filename}`);
-export const IEcdsaService = Symbol(`IEcdsaService@${__filename}`);
-export const ISecondSignatureService = Symbol(`ISecondSignatureService@${__filename}`);
-export const ILegacyMultiSignatureService = Symbol(`ILegacyMultiSignatureService@${__filename}`);
 export const IBalanceService = Symbol(`IBalanceService@${__filename}`);
+export const ILastBlockService = Symbol(`ILastBlockService@${__filename}`);
+
+export const IPublicKeyService = Symbol(`IPublicKeyService@${__filename}`);
+export const IEcdsaService = Symbol(`IEcdsaService@${__filename}`);

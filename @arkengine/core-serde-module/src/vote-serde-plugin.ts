@@ -1,4 +1,5 @@
-import { CoreGroup, CoreType, Vote1, VoteAsset } from "@arkengine/core";
+import { CoreGroup, CoreType } from "@arkengine/core";
+import { Vote1, VoteAsset } from "@arkengine/core-dpos";
 import { IVoteSerdePlugin } from "@arkengine/core-serde";
 import { IAddressCodec, ILegacyWriter, IReader, IWriter } from "@arkengine/serde";
 import assert from "assert";

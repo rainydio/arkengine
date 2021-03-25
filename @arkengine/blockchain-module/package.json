@@ -15,6 +15,9 @@
 	"dependencies": {
 		"@arkengine/blockchain": "workspace:",
 		"@arkengine/blockchain-serde": "workspace:",
+		"@arkengine/blockchain-settings": "workspace:",
+		"@arkengine/core": "workspace:",
+		"@arkengine/db": "workspace:",
 		"@arkengine/serde": "workspace:",
 		"@arkengine/state": "workspace:",
 		"@types/node": "^14.14.35",
@@ -22,6 +25,7 @@
 		"inversify": "^5.0.5"
 	},
 	"devDependencies": {
+		"@types/bcrypto": "workspace:",
 		"typescript": "^4.2.3"
 	}
 }

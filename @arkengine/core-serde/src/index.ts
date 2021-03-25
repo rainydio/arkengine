@@ -1,16 +1,13 @@
 import { ITransaction1SerdePlugin, ITransaction2SerdePlugin } from "@arkengine/blockchain-serde";
 import {
-	DelegateRegistration1,
-	DelegateRegistration2,
 	MultiSignature1,
 	MultiSignature2,
 	SecondSignature1,
 	SecondSignature2,
 	Transfer1,
 	Transfer2,
-	Vote1,
-	Vote2,
 } from "@arkengine/core";
+import { DelegateRegistration1, DelegateRegistration2, Vote1, Vote2 } from "@arkengine/core-dpos";
 
 export interface ITransferSerdePlugin
 	extends ITransaction1SerdePlugin<Transfer1>,

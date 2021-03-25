@@ -11,8 +11,8 @@ export class Writer implements IWriter {
 		this.buffer = buffer;
 	}
 
-	public get remaining(): number {
-		return this.buffer.length - this.offset;
+	public get remaining(): Buffer {
+		return this.buffer.slice(this.offset);
 	}
 
 	public get result(): Buffer {
@@ -60,21 +60,25 @@ export class Writer implements IWriter {
 	}
 
 	public writeBuffer(value: Buffer): void {
+		if (value.length > this.remaining.length) {
+			throw new Error("Write is out of bounds.");
+		}
+
 		this.offset += value.copy(this.buffer, this.offset);
 	}
 
 	public writePublicKey(publicKey: Buffer): void {
 		assert(publicKey.length === 33);
-		this.offset += publicKey.copy(this.buffer, this.offset);
+		this.writeBuffer(publicKey);
 	}
 
 	public writeEcdsaSignature(signature: Buffer): void {
 		assert(2 + signature.readUInt8(1) === signature.length);
-		this.offset += signature.copy(this.buffer, this.offset);
+		this.writeBuffer(signature);
 	}
 
 	public writeAddress(address: Buffer): void {
 		assert(address.length === 21);
-		this.offset += address.copy(this.buffer, this.offset);
+		this.writeBuffer(address);
 	}
 }

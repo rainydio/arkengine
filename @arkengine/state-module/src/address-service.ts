@@ -1,3 +1,4 @@
+import { ICurrentTransaction } from "@arkengine/blockchain";
 import { IAddressCodec } from "@arkengine/serde";
 import { IAddressService } from "@arkengine/state";
 import { inject, injectable } from "inversify";
@@ -5,6 +6,9 @@ import { inject, injectable } from "inversify";
 @injectable()
 export class AddressService implements IAddressService {
 	public constructor(
+		@inject(ICurrentTransaction)
+		private readonly currentTransaction: ICurrentTransaction,
+
 		@inject(IAddressCodec)
 		private readonly addressCodec: IAddressCodec
 	) {}
@@ -15,10 +19,13 @@ export class AddressService implements IAddressService {
 
 	public verifyAddressNetwork(address: Buffer): void {
 		const addressNetwork = this.addressCodec.getAddressNetwork(address);
-		const chainNetwork = 23;
+		const blockchainNetwork = 23;
 
-		if (addressNetwork !== chainNetwork) {
-			throw new Error(`Address is from different "${addressNetwork}" network.`);
+		if (addressNetwork !== blockchainNetwork) {
+			if (this.currentTransaction.isTrusted() === false) {
+				const addressStr = this.addressCodec.convertAddressToString(address);
+				throw new Error(`"${addressStr}" is from different "${addressNetwork}" network.`);
+			}
 		}
 	}
 }

@@ -66,7 +66,7 @@ const modulePkg = {
 };
 
 const moduleTsconfig = {
-	references: [{ path: `../${name}-0` }],
+	references: [{ path: `../${name}` }],
 	extends: "../../tsconfig.package.json",
 	include: ["src/**/**.ts"],
 	compilerOptions: {

@@ -13,7 +13,7 @@ export class AddressCodec implements IAddressCodec {
 
 	public convertAddressToString(address: Buffer): string {
 		const checksum = Hash256.digest(address);
-		const string = base58.encode(Buffer.concat([address, checksum]));
+		const string = base58.encode(Buffer.concat([address, checksum.slice(0, 4)]));
 
 		return string;
 	}

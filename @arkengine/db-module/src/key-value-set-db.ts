@@ -1,21 +1,30 @@
-import { IDbEnvContext, IDbTxnContext, IDbUtils, IKeyValueSetDb } from "@arkengine/db";
+import { IDbEnvContext, IDbTxnContext, IKeyValueSetDb } from "@arkengine/db";
 import { Cursor, Dbi, DbiOptions } from "node-lmdb";
 
+import { Utils } from "./utils";
+
 export class KeyValueSetDb implements IKeyValueSetDb {
-	private readonly dbi: Dbi<DbiOptions & { keyIsBuffer: true; dupSort: true }>;
+	#dbi?: Dbi<DbiOptions & { keyIsBuffer: true; dupSort: true }>;
 
 	public constructor(
-		name: string,
-		dbEnvContext: IDbEnvContext,
+		private readonly name: string,
+		private readonly dbEnvContext: IDbEnvContext,
 		private readonly dbTxnContext: IDbTxnContext,
-		private readonly dbUtils: IDbUtils
-	) {
-		this.dbi = dbEnvContext.getEnv().openDbi({
-			name,
-			create: true,
-			keyIsBuffer: true,
-			dupSort: true,
-		});
+		private readonly utils: Utils
+	) {}
+
+	private get dbi(): Dbi<DbiOptions & { keyIsBuffer: true; dupSort: true }> {
+		if (!this.#dbi) {
+			this.#dbi = this.dbEnvContext.getEnv().openDbi({
+				name: this.name,
+				create: true,
+				keyIsBuffer: true,
+				dupSort: true,
+				txn: this.dbTxnContext.getTxn(),
+			});
+		}
+
+		return this.#dbi;
 	}
 
 	public has(key: Buffer, value: Buffer): boolean {
@@ -29,7 +38,7 @@ export class KeyValueSetDb implements IKeyValueSetDb {
 	}
 
 	public get(key: Buffer, options?: { from?: Buffer; reverse?: boolean }): Iterable<Buffer> {
-		return this.dbUtils.dups(this.dbi, key, options);
+		return this.utils.dups(this.dbi, key, options);
 	}
 
 	public add(key: Buffer, value: Buffer): void {
@@ -37,14 +46,18 @@ export class KeyValueSetDb implements IKeyValueSetDb {
 	}
 
 	public remove(key: Buffer, value: Buffer): void {
-		this.dbTxnContext.getTxn().del(this.dbi, key, value);
+		if (this.has(key, value)) {
+			this.dbTxnContext.getTxn().del(this.dbi, key, value);
+		}
 	}
 
 	public clear(key: Buffer): void {
-		this.dbTxnContext.getTxn().del(this.dbi, key);
+		if (this.dbTxnContext.getTxn().getBinary(this.dbi, key) !== null) {
+			this.dbTxnContext.getTxn().del(this.dbi, key);
+		}
 	}
 
 	public keys(options?: { from?: Buffer; reverse?: boolean }): Iterable<Buffer> {
-		return this.dbUtils.keys(this.dbi, options);
+		return this.utils.keys(this.dbi, options);
 	}
 }

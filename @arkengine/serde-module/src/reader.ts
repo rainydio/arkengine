@@ -1,4 +1,5 @@
 import { IReader } from "@arkengine/serde";
+import assert from "assert";
 import { injectable } from "inversify";
 
 @injectable()
@@ -10,8 +11,8 @@ export class Reader implements IReader {
 		this.buffer = buffer;
 	}
 
-	public get remaining(): number {
-		return this.buffer.length - this.offset;
+	public get remaining(): Buffer {
+		return this.buffer.slice(this.offset);
 	}
 
 	public jump(length: number): void {
@@ -71,6 +72,10 @@ export class Reader implements IReader {
 	}
 
 	public readBuffer(length: number): Buffer {
+		if (this.buffer.length - this.offset < length) {
+			throw new Error("Read is out of bounds.");
+		}
+
 		const value = this.buffer.slice(this.offset, this.offset + length);
 		this.offset += length;
 		return value;

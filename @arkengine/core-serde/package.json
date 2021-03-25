@@ -16,6 +16,7 @@
 		"@arkengine/blockchain": "workspace:",
 		"@arkengine/blockchain-serde": "workspace:",
 		"@arkengine/core": "workspace:",
+		"@arkengine/core-dpos": "workspace:",
 		"@types/node": "^14.14.35"
 	},
 	"devDependencies": {

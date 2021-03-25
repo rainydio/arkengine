@@ -5,6 +5,36 @@ import {
 	Transaction2,
 } from "@arkengine/blockchain";
 
+export interface ISecondPublicKeyDb {
+	has(address: Buffer): boolean;
+	set(address: Buffer, secondPublicKey: Buffer): void;
+	get(address: Buffer): Buffer;
+}
+
+export interface ILegacyMultiSignatureDb {
+	has(address: Buffer): boolean;
+	set(address: Buffer, min: number, lifetime: number, publicKeys: readonly Buffer[]): void;
+	getMin(address: Buffer): number;
+	getLifetime(address: Buffer): number;
+	getPublicKeys(address: Buffer): Buffer[];
+}
+
+export interface ISecondSignatureService {
+	enable(address: Buffer, secondPublicKey: Buffer): void;
+	isEnabled(address: Buffer): boolean;
+	getSecondPublicKey(address: Buffer): Buffer;
+	verify(address: Buffer, hash: Buffer, signature: Buffer): void;
+}
+
+export interface ILegacyMultiSignatureService {
+	enable(address: Buffer, min: number, lifetime: number, publicKeys: readonly Buffer[]): void;
+	isEnabled(address: Buffer): boolean;
+	getMin(address: Buffer): number;
+	getLifetime(address: Buffer): number;
+	getPublicKeys(address: Buffer): Buffer[];
+	verify(address: Buffer, hash: Buffer, signatures: readonly Buffer[]): void;
+}
+
 export const CoreGroup = 1 as const;
 export type CoreGroup = 1;
 
@@ -66,49 +96,6 @@ export interface ISecondSignatureHandler
 	extends ITransaction1HandlerPlugin<SecondSignature1>,
 		ITransaction2HandlerPlugin<SecondSignature2> {}
 
-// DELEGATE REGISTRATION
-
-export type DelegateRegistrationAsset = {
-	readonly username: string;
-};
-
-export type DelegateRegistration1 = Transaction1 & {
-	readonly type: CoreType.DelegateRegistration;
-	readonly asset: DelegateRegistrationAsset;
-};
-
-export type DelegateRegistration2 = Transaction2 & {
-	readonly group: CoreGroup;
-	readonly type: CoreType.DelegateRegistration;
-	readonly asset: DelegateRegistrationAsset;
-};
-
-export interface IDelegateRegistrationHandler
-	extends ITransaction1HandlerPlugin<DelegateRegistration1>,
-		ITransaction2HandlerPlugin<DelegateRegistration2> {}
-
-// VOTE
-
-export type VoteAsset = {
-	readonly votes: readonly {
-		readonly op: "+" | "-";
-		readonly delegatePublicKey: Buffer;
-	}[];
-};
-
-export type Vote1 = Transaction1 & {
-	readonly type: CoreType.Vote;
-	readonly asset: VoteAsset;
-};
-
-export type Vote2 = Transaction2 & {
-	readonly group: CoreGroup;
-	readonly type: CoreType.Vote;
-	readonly asset: VoteAsset;
-};
-
-export interface IVoteHandler extends ITransaction1HandlerPlugin<Vote1>, ITransaction2HandlerPlugin<Vote2> {}
-
 // MULTI SIGNATURE
 
 export type MultiSignature1Asset = {
@@ -137,8 +124,9 @@ export interface IMultiSignatureHandler
 	extends ITransaction1HandlerPlugin<MultiSignature1>,
 		ITransaction2HandlerPlugin<MultiSignature2> {}
 
+export const ISecondPublicKeyDb = Symbol(`ISecondPublicKeyDb@${__filename}`);
+export const ISecondSignatureService = Symbol(`ISecondSignatureService@${__filename}`);
+
 export const ITransferHandler = Symbol(`ITransferHandler@${__filename}`);
 export const ISecondSignatureHandler = Symbol(`ISecondSignatureHandler@${__filename}`);
-export const IDelegateRegistrationHandler = Symbol(`IDelegateRegistrationHandler@${__filename}`);
-export const IVoteHandler = Symbol(`IVoteHandler@${__filename}`);
 export const IMultiSignatureHandler = Symbol(`IMultiSignatureHandler@${__filename}`);

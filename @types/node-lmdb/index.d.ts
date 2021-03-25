@@ -48,6 +48,7 @@ declare module "node-lmdb" {
 		keyIsUint32?: boolean;
 		keyIsBuffer?: boolean;
 		keyIsString?: boolean;
+		txn?: Txn;
 	};
 
 	export class Dbi<O extends DbiOptions> {

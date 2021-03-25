@@ -119,8 +119,12 @@ __metadata:
   dependencies:
     "@arkengine/blockchain": "workspace:"
     "@arkengine/blockchain-serde": "workspace:"
+    "@arkengine/blockchain-settings": "workspace:"
+    "@arkengine/core": "workspace:"
+    "@arkengine/db": "workspace:"
     "@arkengine/serde": "workspace:"
     "@arkengine/state": "workspace:"
+    "@types/bcrypto": "workspace:"
     "@types/node": ^14.14.35
     bcrypto: ^5.4.0
     inversify: ^5.0.5
@@ -154,6 +158,32 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@arkengine/blockchain-settings-module@workspace:, @arkengine/blockchain-settings-module@workspace:@arkengine/blockchain-settings-module":
+  version: 0.0.0-use.local
+  resolution: "@arkengine/blockchain-settings-module@workspace:@arkengine/blockchain-settings-module"
+  dependencies:
+    "@arkengine/blockchain": "workspace:"
+    "@arkengine/blockchain-settings": "workspace:"
+    "@arkengine/core": "workspace:"
+    "@arkengine/state": "workspace:"
+    "@types/bcrypto": "workspace:"
+    "@types/node": ^14.0.14
+    bcrypto: ^5.4.0
+    inversify: ^5.0.1
+    typescript: ^4.0.5
+  languageName: unknown
+  linkType: soft
+
+"@arkengine/blockchain-settings@workspace:, @arkengine/blockchain-settings@workspace:@arkengine/blockchain-settings":
+  version: 0.0.0-use.local
+  resolution: "@arkengine/blockchain-settings@workspace:@arkengine/blockchain-settings"
+  dependencies:
+    "@arkengine/blockchain": "workspace:"
+    "@types/node": ^14.0.14
+    typescript: ^4.0.5
+  languageName: unknown
+  linkType: soft
+
 "@arkengine/blockchain@workspace:, @arkengine/blockchain@workspace:@arkengine/blockchain":
   version: 0.0.0-use.local
   resolution: "@arkengine/blockchain@workspace:@arkengine/blockchain"
@@ -163,12 +193,38 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@arkengine/core-dpos-module@workspace:, @arkengine/core-dpos-module@workspace:@arkengine/core-dpos-module":
+  version: 0.0.0-use.local
+  resolution: "@arkengine/core-dpos-module@workspace:@arkengine/core-dpos-module"
+  dependencies:
+    "@arkengine/blockchain": "workspace:"
+    "@arkengine/core": "workspace:"
+    "@arkengine/core-dpos": "workspace:"
+    "@types/node": ^14.0.14
+    inversify: ^5.0.1
+    typescript: ^4.0.5
+  languageName: unknown
+  linkType: soft
+
+"@arkengine/core-dpos@workspace:, @arkengine/core-dpos@workspace:@arkengine/core-dpos":
+  version: 0.0.0-use.local
+  resolution: "@arkengine/core-dpos@workspace:@arkengine/core-dpos"
+  dependencies:
+    "@arkengine/blockchain": "workspace:"
+    "@arkengine/core": "workspace:"
+    "@types/node": ^14.0.14
+    typescript: ^4.0.5
+  languageName: unknown
+  linkType: soft
+
 "@arkengine/core-module@workspace:, @arkengine/core-module@workspace:@arkengine/core-module":
   version: 0.0.0-use.local
   resolution: "@arkengine/core-module@workspace:@arkengine/core-module"
   dependencies:
     "@arkengine/blockchain": "workspace:"
     "@arkengine/core": "workspace:"
+    "@arkengine/db": "workspace:"
+    "@arkengine/serde": "workspace:"
     "@arkengine/state": "workspace:"
     "@types/node": ^14.14.35
     inversify: ^5.0.5
@@ -182,6 +238,7 @@ __metadata:
   dependencies:
     "@arkengine/blockchain-serde": "workspace:"
     "@arkengine/core": "workspace:"
+    "@arkengine/core-dpos": "workspace:"
     "@arkengine/core-serde": "workspace:"
     "@arkengine/serde": "workspace:"
     "@types/node": ^14.14.35
@@ -197,6 +254,7 @@ __metadata:
     "@arkengine/blockchain": "workspace:"
     "@arkengine/blockchain-serde": "workspace:"
     "@arkengine/core": "workspace:"
+    "@arkengine/core-dpos": "workspace:"
     "@types/node": ^14.14.35
     typescript: ^4.2.3
   languageName: unknown
@@ -240,10 +298,13 @@ __metadata:
   resolution: "@arkengine/replay-postgres-mainnet@workspace:@arkengine/replay-postgres-mainnet"
   dependencies:
     "@arkecosystem/crypto": ^3.0.0-next.23
+    "@arkecosystem/crypto-networks": ^1.0.0
     "@arkengine/blockchain": "workspace:"
     "@arkengine/blockchain-module": "workspace:"
     "@arkengine/blockchain-serde": "workspace:"
     "@arkengine/blockchain-serde-module": "workspace:"
+    "@arkengine/blockchain-settings-module": "workspace:"
+    "@arkengine/core-dpos-module": "workspace:"
     "@arkengine/core-module": "workspace:"
     "@arkengine/core-serde": "workspace:"
     "@arkengine/core-serde-module": "workspace:"
@@ -293,6 +354,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@arkengine/state-module@workspace:@arkengine/state-module"
   dependencies:
+    "@arkengine/blockchain": "workspace:"
+    "@arkengine/db": "workspace:"
     "@arkengine/serde": "workspace:"
     "@arkengine/state": "workspace:"
     "@types/bcrypto": "workspace:"
@@ -1402,7 +1465,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^14.14.35":
+"@types/node@npm:^14.0.14, @types/node@npm:^14.14.35":
   version: 14.14.35
   resolution: "@types/node@npm:14.14.35"
   checksum: 0f6320bf5370d1ff82105fb7f26aa0658499c97d3ec78561e65b65724280244f281602541182b63470d2c8a98db22fbb4f91409c5c7c97da8c3bb8f97fbc5dbc
@@ -6063,7 +6126,7 @@ fsevents@^2.1.2:
   languageName: node
   linkType: hard
 
-"inversify@npm:^5.0.5":
+"inversify@npm:^5.0.1, inversify@npm:^5.0.5":
   version: 5.0.5
   resolution: "inversify@npm:5.0.5"
   checksum: 4610c86e0f79baacbcd80817c59dad374e6ba98d3e3cc8ccc132f87cfaae21b90fd6e86559a00de54888c3c27d8907815243d48f4c31f5ec6b3a60fe02412ceb
@@ -11288,7 +11351,7 @@ resolve@^1.1.6:
   languageName: node
   linkType: hard
 
-typescript@^4.2.3:
+"typescript@^4.0.5, typescript@^4.2.3":
   version: 4.2.3
   resolution: "typescript@npm:4.2.3"
   bin:
@@ -11298,7 +11361,7 @@ typescript@^4.2.3:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.2.3#builtin<compat/typescript>":
+"typescript@patch:typescript@^4.0.5#builtin<compat/typescript>, typescript@patch:typescript@^4.2.3#builtin<compat/typescript>":
   version: 4.2.3
   resolution: "typescript@patch:typescript@npm%3A4.2.3#builtin<compat/typescript>::version=4.2.3&hash=a45b0e"
   bin:

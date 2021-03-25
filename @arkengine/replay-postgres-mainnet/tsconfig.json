@@ -4,6 +4,7 @@
     { "path": "../blockchain-module" },
     { "path": "../blockchain-serde" },
     { "path": "../blockchain-serde-module" },
+    { "path": "../blockchain-settings-module" },
     { "path": "../core-module" },
     { "path": "../core-serde" },
     { "path": "../core-serde-module" },

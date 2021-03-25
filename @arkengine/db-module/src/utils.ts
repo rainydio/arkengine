@@ -1,9 +1,9 @@
-import { IDbTxnContext, IDbUtils } from "@arkengine/db";
+import { IDbTxnContext } from "@arkengine/db";
 import { inject, injectable } from "inversify";
 import { Cursor, Dbi, DbiOptions, Key } from "node-lmdb";
 
 @injectable()
-export class DbUtils implements IDbUtils {
+export class Utils {
 	public constructor(
 		@inject(IDbTxnContext)
 		private readonly dbTxnContext: IDbTxnContext

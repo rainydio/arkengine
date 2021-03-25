@@ -2,6 +2,9 @@
   "references": [
     { "path": "../blockchain" },
     { "path": "../blockchain-serde" },
+    { "path": "../blockchain-settings" },
+    { "path": "../core" },
+    { "path": "../db" },
     { "path": "../serde" },
     { "path": "../state" }
   ],

@@ -1,27 +1,32 @@
 import {
 	IAddressService,
+	IBalanceDb,
 	IBalanceService,
-	IBlockService,
 	IEcdsaService,
-	ILegacyMultiSignatureService,
-	ISecondSignatureService,
+	ILastBlockDb,
+	ILastBlockService,
+	IPublicKeyService,
 } from "@arkengine/state";
 import { interfaces } from "inversify";
 
 import { AddressService } from "./address-service";
+import { BalanceDb } from "./balance-db";
 import { BalanceService } from "./balance-service";
-import { BlockService } from "./block-service";
 import { EcdsaService } from "./ecdsa-service";
-import { LegacyMultiSignatureService } from "./legacy-multi-signature-service";
-import { SecondSignatureService } from "./second-signature-service";
+import { LastBlockDb } from "./last-block-db";
+import { LastBlockService } from "./last-block-service";
+import { PublicKeyService } from "./public-key-service";
 
 export const serviceProvider: interfaces.ContainerModuleCallBack = (bind) => {
-	bind<IBlockService>(IBlockService).to(BlockService);
+	bind<IBalanceDb>(IBalanceDb).to(BalanceDb);
+	bind<ILastBlockDb>(ILastBlockDb).to(LastBlockDb);
+
 	bind<IAddressService>(IAddressService).to(AddressService);
-	bind<IEcdsaService>(IEcdsaService).to(EcdsaService);
-	bind<ISecondSignatureService>(ISecondSignatureService).to(SecondSignatureService);
-	bind<ILegacyMultiSignatureService>(ILegacyMultiSignatureService).to(LegacyMultiSignatureService);
 	bind<IBalanceService>(IBalanceService).to(BalanceService);
+	bind<ILastBlockService>(ILastBlockService).to(LastBlockService);
+
+	bind<IPublicKeyService>(IPublicKeyService).to(PublicKeyService);
+	bind<IEcdsaService>(IEcdsaService).to(EcdsaService);
 };
 
 export default serviceProvider;

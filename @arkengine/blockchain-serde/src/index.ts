@@ -1,11 +1,16 @@
 import { Block, Transaction, Transaction1, Transaction2 } from "@arkengine/blockchain";
 import { ILegacyWriter, IReader, IWriter } from "@arkengine/serde";
 
+export type BlockSerdeDeserializeOptions = {
+	previousBlockIdLength: number;
+};
+
 export interface IBlockSerde {
 	getId(block: Block): Buffer;
+	getIdLegacy(block: Block): Buffer;
 	getHash(block: Block): Buffer;
 	serialize(block: Block): Buffer;
-	deserialize(buffer: Buffer): Block;
+	deserialize(buffer: Buffer, options: BlockSerdeDeserializeOptions): Block;
 }
 
 export interface ITransactionSerde {
@@ -46,7 +51,9 @@ export interface ITransaction2SerdePlugin<T extends Transaction2> {
 	writeTransaction2Asset(writer: IWriter, asset: T["asset"]): void;
 }
 
-export const ITransaction1Serde = Symbol();
-export const ITransaction2Serde = Symbol();
-export const ITransaction1SerdePlugin = Symbol();
-export const ITransaction2SerdePlugin = Symbol();
+export const IBlockSerde = Symbol(`IBlockSerde@${__filename}`);
+export const ITransactionSerde = Symbol(`ITransactionSerde@${__filename}`);
+export const ITransaction1Serde = Symbol(`ITransaction1Serde@${__filename}`);
+export const ITransaction2Serde = Symbol(`ITransaction2Serde@${__filename}`);
+export const ITransaction1SerdePlugin = Symbol(`ITransaction1SerdePlugin@${__filename}`);
+export const ITransaction2SerdePlugin = Symbol(`ITransaction2SerdePlugin@${__filename}`);

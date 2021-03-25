@@ -2,6 +2,8 @@
   "references": [
     { "path": "../blockchain" },
     { "path": "../core" },
+    { "path": "../db" },
+    { "path": "../serde" },
     { "path": "../state" }
   ],
   "extends": "../../tsconfig.package.json",

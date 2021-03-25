@@ -1,4 +1,5 @@
-import { CoreGroup, CoreType, DelegateRegistration1, DelegateRegistrationAsset } from "@arkengine/core";
+import { CoreGroup, CoreType } from "@arkengine/core";
+import { DelegateRegistration1, DelegateRegistrationAsset } from "@arkengine/core-dpos";
 import { IDelegateRegistrationSerdePlugin } from "@arkengine/core-serde";
 import { ILegacyWriter, IReader, IWriter } from "@arkengine/serde";
 import { injectable } from "inversify";
@@ -21,15 +22,15 @@ export class DelegateRegistrationSerdePlugin implements IDelegateRegistrationSer
 		writer.writeBuffer(buf);
 	}
 
-	public writeTransaction1PayloadLegacy(writer: ILegacyWriter, data: DelegateRegistration1): void {
-		writer.writeUInt8(data.type);
-		writer.writeUInt32LE(data.timestamp);
-		writer.writePublicKey(data.senderPublicKey);
+	public writeTransaction1PayloadLegacy(writer: ILegacyWriter, transaction: DelegateRegistration1): void {
+		writer.writeUInt8(transaction.type);
+		writer.writeUInt32LE(transaction.timestamp);
+		writer.writePublicKey(transaction.senderPublicKey);
 		writer.writeAddress(null);
-		writer.writeVendorField(data.vendorField);
+		writer.writeVendorField(transaction.vendorField);
 		writer.writeBigUInt64LE(0n);
-		writer.writeBigUInt64LE(data.fee);
-		writer.writeUtf8(data.asset.username);
+		writer.writeBigUInt64LE(transaction.fee);
+		writer.writeUtf8(transaction.asset.username);
 	}
 
 	public readTransaction2Asset(reader: IReader): DelegateRegistrationAsset {

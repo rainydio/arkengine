@@ -1,7 +1,7 @@
 export interface IReader {
 	readonly buffer: Buffer;
 	readonly offset: number;
-	readonly remaining: number;
+	readonly remaining: Buffer;
 
 	jump(length: number): void;
 
@@ -24,7 +24,7 @@ export interface IReader {
 export interface IWriter {
 	readonly buffer: Buffer;
 	readonly offset: number;
-	readonly remaining: number;
+	readonly remaining: Buffer;
 	readonly result: Buffer;
 
 	jump(length: number): void;

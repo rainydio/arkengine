@@ -1,5 +1,10 @@
-import { CoreGroup, CoreType, ISecondSignatureHandler, SecondSignatureAsset } from "@arkengine/core";
-import { ISecondSignatureService } from "@arkengine/state";
+import {
+	CoreGroup,
+	CoreType,
+	ISecondSignatureHandler,
+	ISecondSignatureService,
+	SecondSignatureAsset,
+} from "@arkengine/core";
 import { inject, injectable } from "inversify";
 
 @injectable()
@@ -12,7 +17,7 @@ export class SecondSignatureHandler implements ISecondSignatureHandler {
 		private readonly secondSignatureService: ISecondSignatureService
 	) {}
 
-	public handleTransaction1(transactionId: Buffer, senderAddress: Buffer, asset: SecondSignatureAsset): void {
+	public handleTransaction1(senderAddress: Buffer, asset: SecondSignatureAsset): void {
 		try {
 			this.secondSignatureService.enable(senderAddress, asset.secondPublicKey);
 		} catch (error) {
@@ -20,7 +25,7 @@ export class SecondSignatureHandler implements ISecondSignatureHandler {
 		}
 	}
 
-	public handleTransaction2(transactionId: Buffer, senderAddress: Buffer, asset: SecondSignatureAsset): void {
-		this.handleTransaction1(transactionId, senderAddress, asset);
+	public handleTransaction2(senderAddress: Buffer, asset: SecondSignatureAsset): void {
+		this.handleTransaction1(senderAddress, asset);
 	}
 }

@@ -2,7 +2,8 @@
   "references": [
     { "path": "../blockchain" },
     { "path": "../blockchain-serde" },
-    { "path": "../core" }
+    { "path": "../core" },
+    { "path": "../core-dpos" }
   ],
   "extends": "../../tsconfig.package.json",
   "include": ["src/**/**.ts"],
